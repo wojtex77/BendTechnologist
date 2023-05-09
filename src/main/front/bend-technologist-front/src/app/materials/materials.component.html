@@ -1,10 +1,10 @@
+<h4 class="my-3 text-center">Materiały</h4>
 <div class="m-3">
-  <button type="button" class="btn btn-sm btn-outline-primary" (click)="newMaterial()">Dodaj</button>
+  <button type="button" class="btn btn-sm btn-outline-secondary" (click)="newMaterial()">Dodaj</button>
 </div>
 <div class="m-3">
   <table class="table table-hover">
-    <thead class="bg-dark text-light">
-    <th>Id</th>
+    <thead class="bg-dark text-light text-center">
     <th>EN_10088</th>
     <th>PN</th>
     <th>AISI</th>
@@ -13,9 +13,8 @@
     <th>Gęstość</th>
     <th>Akcje</th>
     </thead>
-    <tbody>
+    <tbody class="text-center">
     <tr *ngFor="let material of materials">
-      <td>{{material.id}}</td>
       <td>{{material.en10088}}</td>
       <td>{{material.pn}}</td>
       <td>{{material.aisi}}</td>

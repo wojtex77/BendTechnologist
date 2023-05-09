@@ -1,4 +1,4 @@
-export class MaterialEntity{
+export class MaterialEntity {
   public id: any;
   public pn: any;
   public en10088: any;
@@ -6,5 +6,4 @@ export class MaterialEntity{
   public din: any;
   public gost: any;
   public density: any;
-
 }

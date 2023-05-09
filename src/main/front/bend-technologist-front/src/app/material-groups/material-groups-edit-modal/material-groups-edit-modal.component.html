@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <h4 class="modal-title">Edytuj grupę materiałową</h4>
+  <button type="button" class="btn-close" aria-label="Close"
+          (click)="activeEditMaterialModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="materialGroupForm">
+
+    <div class="form-floating mb-3" hidden>
+      <input type="number" class="form-control" id="id" formControlName="id" autofocus>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="shortName" formControlName="shortName" autofocus>
+      <label for="shortName">EN 10088</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="fullName" formControlName="fullName" autofocus>
+      <label for="fullName">EN 10088</label>
+    </div>
+
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-sm btn-outline-danger" (click)="activeEditMaterialModal.close('Close click')">
+    Zamknij
+  </button>
+  <button type="submit" class="btn btn-sm btn-outline-success" (click)="onSubmit()">Zapisz</button>
+
+
+</div>
