@@ -1,0 +1,29 @@
+<div class="m-3">
+  <button type="button" class="btn btn-sm btn-outline-primary" (click)="newMaterial()">Dodaj</button>
+</div>
+<div class="m-3">
+  <table class="table table-hover">
+    <thead class="bg-dark text-light">
+    <th>Id</th>
+    <th>EN_10088</th>
+    <th>PN</th>
+    <th>AISI</th>
+    <th>DIN</th>
+    <th>GOST</th>
+    <th>Gęstość</th>
+    <th>Akcje</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let material of materials">
+      <td>{{material.id}}</td>
+      <td>{{material.en10088}}</td>
+      <td>{{material.pn}}</td>
+      <td>{{material.aisi}}</td>
+      <td>{{material.din}}</td>
+      <td>{{material.gost}}</td>
+      <td>{{material.density}}</td>
+      <td><i class="bi bi-trash3 mx-2" (click)="removeMaterial(material.id)"></i><i class="bi bi-pencil-square mx-2" (click)="editMaterial(material.id)"></i></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,9 +1,11 @@
 package com.example.bendtechnologist.material;
 
 import jakarta.websocket.server.PathParam;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,8 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("material")
+@CrossOrigin
+@Slf4j
 public class MaterialController implements MaterialOperations {
 
     private final MaterialRepository materialRepository;
@@ -46,6 +50,7 @@ public class MaterialController implements MaterialOperations {
     @Override
     public ResponseEntity<Material> addMaterial(@RequestBody Material material) {
 
+        log.info(material.toString());
         Material savedMaterial = materialRepository.save(material);
 
         return new ResponseEntity<>(savedMaterial, HttpStatus.OK);

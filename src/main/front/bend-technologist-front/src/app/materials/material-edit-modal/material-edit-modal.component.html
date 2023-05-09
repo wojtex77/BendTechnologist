@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h4 class="modal-title">Edytuj materiał</h4>
+  <button type="button" class="btn-close" aria-label="Close"
+          (click)="activeEditMaterialModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="materialForm">
+
+    <div class="form-floating mb-3" hidden>
+      <input type="number" class="form-control" id="id" formControlName="id" autofocus>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="en10088" formControlName="en10088" autofocus>
+      <label for="en10088">EN 10088</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="pn" formControlName="pn">
+      <label for="pn">PN (polska norma)</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="aisi" formControlName="aisi">
+      <label for="aisi">AISI (norma amerykańska)</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="din" formControlName="din">
+      <label for="din">DIN (norma niemiecka)</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="gost" formControlName="gost">
+      <label for="gost">GOST (norma rosyjska)</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="number" step="0.01" min="0" max="20" class="form-control" id="density" formControlName="density">
+      <label for="density">Gęstość (g/cm^3)</label>
+    </div>
+
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-sm btn-outline-danger" (click)="activeEditMaterialModal.close('Close click')">
+    Zamknij
+  </button>
+  <button type="submit" class="btn btn-sm btn-outline-success" (click)="onSubmit()">Zapisz</button>
+
+
+</div>
