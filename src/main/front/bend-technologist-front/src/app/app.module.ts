@@ -14,6 +14,7 @@ import { MaterialGroupsNewModalComponent } from './material-groups/material-grou
 import { MaterialGroupsEditModalComponent } from './material-groups/material-groups-edit-modal/material-groups-edit-modal.component';
 import { ToastInfoComponent } from './shared/toast-info/toast-info.component';
 import {ToastInfoContainer} from "./shared/toast-info/toast-info-container.component";
+import { ToolsComponent } from './tools/tools.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {ToastInfoContainer} from "./shared/toast-info/toast-info-container.compo
     MaterialGroupsComponent,
     MaterialGroupsNewModalComponent,
     MaterialGroupsEditModalComponent,
-    ToastInfoComponent
+    ToastInfoComponent,
+    ToolsComponent
   ],
   imports: [
     BrowserModule,

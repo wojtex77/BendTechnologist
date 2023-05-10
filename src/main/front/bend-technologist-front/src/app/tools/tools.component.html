@@ -1,0 +1,19 @@
+<div class="m-3">
+  <button type="button" class="btn btn-sm btn-outline-secondary" (click)="newTools()">Dodaj</button>
+</div>
+<div class="m-3">
+  <table class="table table-hover">
+    <thead class="bg-dark text-light text-center">
+    <th>Stempel</th>
+    <th>Matryca</th>
+    <th>Akcje</th>
+    </thead>
+    <tbody class="text-center">
+    <tr *ngFor="let tool of toolSet">
+      <td>{{tool.dieName}}</td>
+      <td>{{tool.punchName}}</td>
+      <td><i class="bi bi-trash3 mx-2" (click)="removeTool(tool.id)"></i><i class="bi bi-pencil-square mx-2" (click)="editTool(tool.id)"></i></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
