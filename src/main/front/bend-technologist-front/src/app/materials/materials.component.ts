@@ -5,6 +5,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {MaterialNewModalComponent} from "./material-new-modal/material-new-modal.component";
 import {MaterialsService} from "./materials.service";
 import {MaterialEditModalComponent} from "./material-edit-modal/material-edit-modal.component";
+import {ToastService} from "../shared/toast-info/toast-info-service.component";
 
 @Component({
   selector: 'app-materials',
@@ -14,7 +15,11 @@ import {MaterialEditModalComponent} from "./material-edit-modal/material-edit-mo
 export class MaterialsComponent implements OnInit {
   public materials: Array<MaterialEntity>;
 
-  constructor(private http: HttpClient, private modalNewMaterialService: NgbModal, private modalEditMaterialService: NgbModal, private materialService: MaterialsService) {
+  constructor(private http: HttpClient,
+              private modalNewMaterialService: NgbModal,
+              private modalEditMaterialService: NgbModal,
+              private materialService: MaterialsService,
+              private toastService: ToastService) {
     this.materials = []
   }
 
@@ -32,6 +37,7 @@ export class MaterialsComponent implements OnInit {
     let materialNewModalComponentReference = this.modalNewMaterialService.open(MaterialNewModalComponent, {size: 'sm'});
     materialNewModalComponentReference.componentInstance.newMaterialSaved.subscribe((res: MaterialEntity) => {
       this.materials.push(res);
+      this.toastService.showSuccessToast("Dodano nowy materiał: \"" + res.en10088 + "\"")
     });
   }
 
@@ -46,7 +52,11 @@ export class MaterialsComponent implements OnInit {
         }
         i++;
       })
-    });
+        this.toastService.showSuccessToast("Pomyślnie usunięto materiał")
+    },
+      error => {
+        this.toastService.showDangerToast("Nie udało się usunąć materiału")
+      });
   }
 
 
@@ -69,6 +79,7 @@ export class MaterialsComponent implements OnInit {
         }
         i++;
       })
+      this.toastService.showSuccessToast("Pomyślnie edytowano materiał \"" + res.en10088 + "\"")
     })
   }
 }

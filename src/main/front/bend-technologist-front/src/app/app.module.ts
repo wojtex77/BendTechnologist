@@ -12,6 +12,8 @@ import { MaterialEditModalComponent } from './materials/material-edit-modal/mate
 import { MaterialGroupsComponent } from './material-groups/material-groups.component';
 import { MaterialGroupsNewModalComponent } from './material-groups/material-groups-new-modal/material-groups-new-modal.component';
 import { MaterialGroupsEditModalComponent } from './material-groups/material-groups-edit-modal/material-groups-edit-modal.component';
+import { ToastInfoComponent } from './shared/toast-info/toast-info.component';
+import {ToastInfoContainer} from "./shared/toast-info/toast-info-container.component";
 
 @NgModule({
   declarations: [
@@ -21,14 +23,16 @@ import { MaterialGroupsEditModalComponent } from './material-groups/material-gro
     MaterialEditModalComponent,
     MaterialGroupsComponent,
     MaterialGroupsNewModalComponent,
-    MaterialGroupsEditModalComponent
+    MaterialGroupsEditModalComponent,
+    ToastInfoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastInfoContainer
   ],
   providers: [],
   bootstrap: [AppComponent]

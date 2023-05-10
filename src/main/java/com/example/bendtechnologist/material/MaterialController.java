@@ -1,5 +1,7 @@
 package com.example.bendtechnologist.material;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.websocket.server.PathParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -25,6 +27,9 @@ public class MaterialController implements MaterialOperations {
 
     private final MaterialRepository materialRepository;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     public MaterialController(MaterialRepository materialRepository) {
         this.materialRepository = materialRepository;
     }
@@ -42,7 +47,7 @@ public class MaterialController implements MaterialOperations {
     public ResponseEntity<List<Material>> getMaterials() {
 
         List<Material> material = materialRepository.findAll();
-
+        log.info("returning all materials");
         return new ResponseEntity<>(material, HttpStatus.OK);
     }
 
@@ -50,10 +55,12 @@ public class MaterialController implements MaterialOperations {
     @Override
     public ResponseEntity<Material> addMaterial(@RequestBody Material material) {
 
-        log.info(material.toString());
         Material savedMaterial = materialRepository.save(material);
+        entityManager.clear();
+        Material materialFromDb = materialRepository.findById(savedMaterial.getId()).get();
 
-        return new ResponseEntity<>(savedMaterial, HttpStatus.OK);
+        log.info("saved material:" + savedMaterial.toString());
+        return new ResponseEntity<>(materialFromDb, HttpStatus.OK);
     }
 
     @DeleteMapping("{materialId}")
@@ -62,9 +69,11 @@ public class MaterialController implements MaterialOperations {
 
         if (materialRepository.findById(id).isPresent()) {
             materialRepository.deleteById(id);
+            log.info("removed material by id: " + id);
             return new ResponseEntity<>(HttpStatus.OK);
         }
 
+        log.error("Removing material by id: " + id + " failed");
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

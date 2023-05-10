@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {MaterialGroupEntity} from "../entitites/MaterialGroupEntity";
 import {MaterialGroupsService} from "./material-groups.service";
@@ -7,17 +7,25 @@ import {MaterialGroupsNewModalComponent} from "./material-groups-new-modal/mater
 import {MaterialEntity} from "../entitites/MaterialEntity";
 import {MaterialEditModalComponent} from "../materials/material-edit-modal/material-edit-modal.component";
 import {MaterialGroupsEditModalComponent} from "./material-groups-edit-modal/material-groups-edit-modal.component";
+import {ToastService} from "../shared/toast-info/toast-info-service.component";
 
 @Component({
   selector: 'app-material-groups',
   templateUrl: './material-groups.component.html',
   styleUrls: ['./material-groups.component.css']
 })
+@Injectable(
+
+)
 export class MaterialGroupsComponent {
 
   public materialGroups: Array<MaterialGroupEntity>;
 
-  constructor(private http: HttpClient, private materialGroupService: MaterialGroupsService, private modalNewMaterialGroupService: NgbModal, private modalEditMaterialGroupService: NgbModal) {
+  constructor(private http: HttpClient,
+              private materialGroupService: MaterialGroupsService,
+              private modalNewMaterialGroupService: NgbModal,
+              private modalEditMaterialGroupService: NgbModal,
+              private toastService: ToastService) {
     this.materialGroups = []
   }
 
@@ -34,6 +42,7 @@ export class MaterialGroupsComponent {
     let materialGroupNewModalComponentReference = this.modalNewMaterialGroupService.open(MaterialGroupsNewModalComponent, {size: 'sm'});
     materialGroupNewModalComponentReference.componentInstance.newMaterialGroupSaved.subscribe((res: MaterialGroupEntity) => {
       this.materialGroups.push(res);
+      this.toastService.showSuccessToast("Pomyślnie dodano grupę materiałową \"" + res.fullName + "\"")
     });
   }
 
@@ -47,7 +56,13 @@ export class MaterialGroupsComponent {
         }
         i++;
       })
-    });
+        this.toastService.showSuccessToast("Pomyślnie usunięto grupę materiałową")
+    },
+      (error) => {
+      console.log(error.headers)
+      console.log(error.status)
+        this.toastService.showDangerToast("Nie można usunąć grupy materiałowej")
+      });
 
   }
 
@@ -70,6 +85,7 @@ export class MaterialGroupsComponent {
         }
         i++;
       })
+      this.toastService.showSuccessToast("Pomyślnie edytowano grupę materiałową \"" + res.fullName + "\"")
     })
   }
 }

@@ -5,6 +5,7 @@
 <div class="m-3">
   <table class="table table-hover">
     <thead class="bg-dark text-light text-center">
+    <th>Grupa</th>
     <th>EN_10088</th>
     <th>PN</th>
     <th>AISI</th>
@@ -15,12 +16,13 @@
     </thead>
     <tbody class="text-center">
     <tr *ngFor="let material of materials">
+      <td>{{material.materialGroup.shortName}}</td>
       <td>{{material.en10088}}</td>
       <td>{{material.pn}}</td>
       <td>{{material.aisi}}</td>
       <td>{{material.din}}</td>
       <td>{{material.gost}}</td>
-      <td>{{material.density}}</td>
+      <td>{{material.density | number: '1.2-2'}}</td>
       <td><i class="bi bi-trash3 mx-2" (click)="removeMaterial(material.id)"></i><i class="bi bi-pencil-square mx-2" (click)="editMaterial(material.id)"></i></td>
     </tr>
     </tbody>

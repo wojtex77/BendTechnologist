@@ -1,15 +1,17 @@
-import {Component, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {MaterialEntity} from "../../entitites/MaterialEntity";
 import {FormControl, FormGroup} from "@angular/forms";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {MaterialsService} from "../materials.service";
+import {MaterialGroupsService} from "../../material-groups/material-groups.service";
+import {MaterialGroupEntity} from "../../entitites/MaterialGroupEntity";
 
 @Component({
   selector: 'app-material-edit-modal',
   templateUrl: './material-edit-modal.component.html',
   styleUrls: ['./material-edit-modal.component.css']
 })
-export class MaterialEditModalComponent {
+export class MaterialEditModalComponent implements OnInit{
 
   public entityToEdit!: MaterialEntity
 
@@ -21,12 +23,22 @@ export class MaterialEditModalComponent {
     din: new FormControl(''),
     gost: new FormControl(''),
     density: new FormControl(7.85),
+    materialGroupId: new FormControl('')
   });
 
   public editedMaterialSaved: EventEmitter<MaterialEntity> = new EventEmitter();
+  public materialGroups!: Array<MaterialGroupEntity>;
 
-  constructor(public activeEditMaterialModal: NgbActiveModal, private materialsService: MaterialsService) {
+  constructor(public activeEditMaterialModal: NgbActiveModal, private materialsService: MaterialsService, private materialGroupService: MaterialGroupsService) {
   }
+
+  ngOnInit(): void {
+    this.materialGroupService.getMaterials().subscribe(res => {
+      this.materialGroups = res;
+    })
+  }
+
+
 
   setEntityToEdit(entity: MaterialEntity) {
     this.entityToEdit = entity;
@@ -37,7 +49,8 @@ export class MaterialEditModalComponent {
       aisi: entity.aisi,
       din: entity.din,
       gost: entity.gost,
-      density: entity.density
+      density: entity.density,
+      materialGroupId: entity.materialGroup.id
     })
   }
 
@@ -51,6 +64,7 @@ export class MaterialEditModalComponent {
     material.din = this.materialForm.get("din")?.getRawValue();
     material.gost = this.materialForm.get("gost")?.getRawValue();
     material.density = this.materialForm.get("density")?.getRawValue();
+    material.materialGroup.id = this.materialForm.get("materialGroupId")?.getRawValue();
 
     this.materialsService.saveMaterial(material).subscribe(res => {
       this.activeEditMaterialModal.close();

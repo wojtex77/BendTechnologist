@@ -6,6 +6,13 @@
 <div class="modal-body">
   <form [formGroup]="materialForm">
 
+
+    <div class="form-floating mb-3">
+      <select class="form-select" id="materialGroupSelect" aria-label="Floating label select example" formControlName="materialGroupId">
+        <option *ngFor="let singleMaterialGroup of materialGroups" value="{{singleMaterialGroup.id}}">{{singleMaterialGroup.shortName}}</option>
+      </select>
+      <label for="materialGroupSelect">Grupa materiałowa</label>
+    </div>
     <div class="form-floating mb-3">
       <input type="text" class="form-control" id="en10088" formControlName="en10088" autofocus>
       <label for="en10088">EN 10088</label>
