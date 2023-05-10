@@ -14,9 +14,35 @@
     </div>
     <div class="col-6">
       <div class="row">
-        <app-material-groups class="bg-light"></app-material-groups>
-        <hr class="my-2">
-        <app-materials class="bg-light"></app-materials>
+        <div ngbAccordion [closeOthers]="true">
+
+          <div ngbAccordionItem>
+            <h2 ngbAccordionHeader>
+              <button ngbAccordionButton>Grupy Materiałowe</button>
+            </h2>
+            <div ngbAccordionCollapse>
+              <div ngbAccordionBody>
+                <ng-template>
+                  <app-material-groups class="bg-light"></app-material-groups>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+
+          <div ngbAccordionItem>
+            <h2 ngbAccordionHeader>
+              <button ngbAccordionButton>Materiały</button>
+            </h2>
+            <div ngbAccordionCollapse>
+              <div ngbAccordionBody>
+                <ng-template>
+                  <app-materials class="bg-light"></app-materials>
+                </ng-template>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
   </div>
