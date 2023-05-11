@@ -9,7 +9,7 @@
     <th>Akcje</th>
     </thead>
     <tbody class="text-center">
-    <tr *ngFor="let materialGroup of materialGroups">
+    <tr *ngFor="let materialGroup of materialGroups" (click)="selectMaterialGroup(materialGroup)">
       <td>{{materialGroup.shortName}}</td>
       <td>{{materialGroup.fullName}}</td>
       <td><i class="bi bi-trash3 mx-2" (click)="removeMaterial(materialGroup.id)"></i><i class="bi bi-pencil-square mx-2" (click)="editMaterial(materialGroup.id)"></i></td>

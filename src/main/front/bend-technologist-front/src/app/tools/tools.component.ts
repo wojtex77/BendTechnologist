@@ -1,12 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ToolSetEntity} from "../entitites/ToolSetEntity";
 import {ToolsService} from "./tools.service";
 import {ToastService} from "../shared/toast-info/toast-info-service.component";
-import {MaterialNewModalComponent} from "../materials/material-new-modal/material-new-modal.component";
-import {MaterialEntity} from "../entitites/MaterialEntity";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ToolsNewModalComponent} from "./tools-new-modal/tools-new-modal.component";
-import {MaterialEditModalComponent} from "../materials/material-edit-modal/material-edit-modal.component";
 import {ToolsEditModalComponent} from "./tools-edit-modal/tools-edit-modal.component";
 
 @Component({
@@ -17,7 +14,8 @@ import {ToolsEditModalComponent} from "./tools-edit-modal/tools-edit-modal.compo
 export class ToolsComponent implements OnInit{
 
   public toolSets: ToolSetEntity []
-  public selectedTool!: ToolSetEntity;
+  private selectedTool!: ToolSetEntity;
+  @Output() toolSelected = new EventEmitter<ToolSetEntity>();
 
 
   constructor(private toolSetService: ToolsService,
@@ -88,5 +86,11 @@ export class ToolsComponent implements OnInit{
       this.toastService.showSuccessToast("Pomyślnie edytowano zestaw \"" + res.punchName + "/" + res.dieName +"\"")
     })
 
+  }
+
+  setAsActive(tool: ToolSetEntity) {
+
+    this.selectedTool = tool;
+    this.toolSelected.emit(tool);
   }
 }

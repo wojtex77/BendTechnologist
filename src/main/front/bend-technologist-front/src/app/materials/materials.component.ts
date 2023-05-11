@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {MaterialEntity} from "../entitites/MaterialEntity";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -13,7 +13,9 @@ import {ToastService} from "../shared/toast-info/toast-info-service.component";
   styleUrls: ['./materials.component.css']
 })
 export class MaterialsComponent implements OnInit {
+
   public materials: Array<MaterialEntity>;
+  @Output() materialSelected = new EventEmitter<MaterialEntity>();
 
   constructor(private http: HttpClient,
               private modalNewMaterialService: NgbModal,
@@ -31,7 +33,6 @@ export class MaterialsComponent implements OnInit {
     });
   }
 
-
   newMaterial() {
 
     let materialNewModalComponentReference = this.modalNewMaterialService.open(MaterialNewModalComponent, {size: 'sm'});
@@ -40,7 +41,6 @@ export class MaterialsComponent implements OnInit {
       this.toastService.showSuccessToast("Dodano nowy materiał: \"" + res.en10088 + "\"")
     });
   }
-
 
   removeMaterial(id: number) {
 
@@ -58,7 +58,6 @@ export class MaterialsComponent implements OnInit {
         this.toastService.showDangerToast("Nie udało się usunąć materiału")
       });
   }
-
 
   editMaterial(id: number) {
 
@@ -81,5 +80,10 @@ export class MaterialsComponent implements OnInit {
       })
       this.toastService.showSuccessToast("Pomyślnie edytowano materiał \"" + res.en10088 + "\"")
     })
+  }
+
+  selectMaterial(material: MaterialEntity) {
+
+    this.materialSelected.emit(material)
   }
 }

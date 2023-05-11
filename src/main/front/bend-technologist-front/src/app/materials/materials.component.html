@@ -14,7 +14,7 @@
     <th>Akcje</th>
     </thead>
     <tbody class="text-center">
-    <tr *ngFor="let material of materials">
+    <tr *ngFor="let material of materials" (click)="selectMaterial(material)">
       <td>{{material.materialGroup.shortName}}</td>
       <td>{{material.en10088}}</td>
       <td>{{material.pn}}</td>

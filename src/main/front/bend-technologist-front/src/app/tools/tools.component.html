@@ -10,7 +10,7 @@
     <th>Akcje</th>
     </thead>
     <tbody class="text-center">
-    <tr *ngFor="let tool of toolSets">
+    <tr *ngFor="let tool of toolSets" (click)="setAsActive(tool)">
       <td>{{tool.punchName}}</td>
       <td>{{tool.dieName}}</td>
       <td>{{tool.description}}</td>

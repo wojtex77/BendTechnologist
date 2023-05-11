@@ -18,12 +18,15 @@
 
           <div ngbAccordionItem>
             <h2 ngbAccordionHeader>
-              <button ngbAccordionButton>Grupy Materiałowe</button>
+              <button ngbAccordionButton>
+                <div class="col-3">Grupa materiałowa:</div>
+                <div class="col fw-bold">{{materialGroupSelected.shortName}}</div>
+              </button>
             </h2>
             <div ngbAccordionCollapse>
               <div ngbAccordionBody>
                 <ng-template>
-                  <app-material-groups class="bg-light"></app-material-groups>
+                  <app-material-groups class="bg-light" (materialGroupSelected)="setSelectedMaterialGroup($event)"></app-material-groups>
                 </ng-template>
               </div>
             </div>
@@ -31,12 +34,15 @@
 
           <div ngbAccordionItem>
             <h2 ngbAccordionHeader>
-              <button ngbAccordionButton>Materiały</button>
+              <button ngbAccordionButton>
+                <div class="col-3">Materiał:</div>
+                <div class="col fw-bold">{{materialSelected.en10088}}</div>
+              </button>
             </h2>
             <div ngbAccordionCollapse>
               <div ngbAccordionBody>
                 <ng-template>
-                  <app-materials class="bg-light"></app-materials>
+                  <app-materials class="bg-light" (materialSelected)="setSelectedMaterial($event)"></app-materials>
                 </ng-template>
               </div>
             </div>
@@ -44,12 +50,15 @@
 
           <div ngbAccordionItem>
             <h2 ngbAccordionHeader>
-              <button ngbAccordionButton>Narzędzia</button>
+              <button ngbAccordionButton>
+                <div class="col-3">Narzędzia:</div>
+                <div class="col fw-bold">{{toolSetSelected.punchName}}/{{toolSetSelected.dieName}}</div>
+              </button>
             </h2>
             <div ngbAccordionCollapse>
               <div ngbAccordionBody>
                 <ng-template>
-                  <app-tools class="bg-light"></app-tools>
+                  <app-tools class="bg-light" (toolSelected)="setSelectedToolSet($event)"></app-tools>
                 </ng-template>
               </div>
             </div>
