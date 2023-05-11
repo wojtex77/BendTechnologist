@@ -6,12 +6,14 @@
     <thead class="bg-dark text-light text-center">
     <th>Stempel</th>
     <th>Matryca</th>
+    <th>Opis</th>
     <th>Akcje</th>
     </thead>
     <tbody class="text-center">
-    <tr *ngFor="let tool of toolSet">
-      <td>{{tool.dieName}}</td>
+    <tr *ngFor="let tool of toolSets">
       <td>{{tool.punchName}}</td>
+      <td>{{tool.dieName}}</td>
+      <td>{{tool.description}}</td>
       <td><i class="bi bi-trash3 mx-2" (click)="removeTool(tool.id)"></i><i class="bi bi-pencil-square mx-2" (click)="editTool(tool.id)"></i></td>
     </tr>
     </tbody>

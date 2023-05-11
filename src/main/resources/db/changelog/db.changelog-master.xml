@@ -7,4 +7,6 @@
     <include relativeToChangelogFile="true" file="scripts/20230509140700_create_MATERIAL_GROUP.sql"/>
     <include relativeToChangelogFile="true" file="scripts/20230510085200_add_MATERIAL_GROUP_to_MATERIAL.sql"/>
     <include relativeToChangelogFile="true" file="scripts/20230510105100_add_foreign_key_to_MATERIAL.sql"/>
+    <include relativeToChangelogFile="true" file="scripts/20230510150500_create_TOOL_SET.sql"/>
+    <include relativeToChangelogFile="true" file="scripts/20230510151600_add_DESCRIPTION_to TOOL_SET.sql"/>
 </databaseChangeLog>

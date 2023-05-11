@@ -1,0 +1,2 @@
+ALTER TABLE TOOL_SET
+    ADD DESCRIPTION varchar(255) NULL COMMENT 'Description';

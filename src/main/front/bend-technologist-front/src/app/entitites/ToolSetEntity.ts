@@ -4,6 +4,7 @@ export class ToolSetEntity {
   public dieName!: string;
   public punchRadius!: number;
   public punchName!: string;
+  public description!: string;
 
 
   constructor() {
