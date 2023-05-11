@@ -40,6 +40,7 @@ export class ToolsComponent implements OnInit{
     let toolSetNewModalComponentReference = this.modalNewToolSetService.open(ToolsNewModalComponent, {size: 'sm'});
     toolSetNewModalComponentReference.componentInstance.newToolSetSaved.subscribe((res: ToolSetEntity) => {
       this.toolSets.push(res);
+      this.setAsActive(res);
       this.toastService.showSuccessToast("Dodano nowy zestaw narzędzi: \"" + res.punchName + "/" + res.dieName + "\"")
     });
 
@@ -56,6 +57,7 @@ export class ToolsComponent implements OnInit{
           }
           i++;
         })
+      this.toolSelected.emit(new ToolSetEntity())
         this.toastService.showSuccessToast("Pomyślnie usunięto zestaw narzędzi")
       },
       error => {

@@ -32,12 +32,12 @@ export class MaterialGroupsComponent {
     })
   }
 
-
   newMaterialGroup() {
 
     let materialGroupNewModalComponentReference = this.modalNewMaterialGroupService.open(MaterialGroupsNewModalComponent, {size: 'sm'});
     materialGroupNewModalComponentReference.componentInstance.newMaterialGroupSaved.subscribe((res: MaterialGroupEntity) => {
       this.materialGroups.push(res);
+      this.selectMaterialGroup(res);
       this.toastService.showSuccessToast("Pomyślnie dodano grupę materiałową \"" + res.fullName + "\"")
     });
   }
@@ -52,6 +52,7 @@ export class MaterialGroupsComponent {
           }
           i++;
         })
+        this.materialGroupSelected.emit(new MaterialGroupEntity())
         this.toastService.showSuccessToast("Pomyślnie usunięto grupę materiałową")
       },
       (error) => {

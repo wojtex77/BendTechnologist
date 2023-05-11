@@ -1,0 +1,18 @@
+<div class="m-3">
+  <button type="button" class="btn btn-sm btn-outline-secondary"
+          (click)="newThickness()">Dodaj</button>
+</div>
+<div class="m-3">
+  <table class="table table-hover">
+    <thead class="bg-dark text-light text-center">
+    <th>Grubość [mm]</th>
+    <th>Akcje</th>
+    </thead>
+    <tbody class="text-center clickable">
+    <tr *ngFor="let thickness of materialThicknesses" (click)="setAsActive(thickness)">
+      <td>{{thickness.thickness | number:'1.1-2'}}</td>
+      <td><i class="bi bi-trash3 mx-2" (click)="removeThickness(thickness.id)"></i></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

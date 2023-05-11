@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ToolSetEntity} from "./entitites/ToolSetEntity";
 import {MaterialEntity} from "./entitites/MaterialEntity";
 import {MaterialGroupEntity} from "./entitites/MaterialGroupEntity";
+import {MaterialThicknessEntity} from "./entitites/MaterialThicknessEntity";
 
 @Component({
   selector: 'app-root',
@@ -14,9 +15,11 @@ export class AppComponent {
   toolSetSelected: ToolSetEntity;
   materialSelected!: MaterialEntity;
   materialGroupSelected!: MaterialGroupEntity;
+  materialThicknessSelected!: MaterialThicknessEntity;
 
   constructor() {
     this.toolSetSelected = new ToolSetEntity();
+    this.materialThicknessSelected = new MaterialThicknessEntity();
     this.setMaterialBlank()
     this.setMaterialGroupBlank();
   }
@@ -26,21 +29,37 @@ export class AppComponent {
   }
 
   setSelectedMaterial($event: MaterialEntity) {
-    this.materialSelected = $event;
-    this.materialGroupSelected = $event.materialGroup;
+
+    if ($event.id === null) {
+      this.setMaterialBlank()
+      this.setMaterialGroupBlank()
+    } else {
+      this.materialSelected = $event;
+      this.materialGroupSelected = $event.materialGroup;
+    }
   }
 
   setSelectedMaterialGroup($event: MaterialGroupEntity) {
-    this.materialGroupSelected = $event;
-    this.setMaterialBlank();
+
+    if ($event.id === null){
+      this.setMaterialGroupBlank()
+      this.setMaterialBlank()
+    } else {
+      this.materialGroupSelected = $event;
+      this.setMaterialBlank();
+    }
   }
 
-  private setMaterialBlank(){
+  setSelectedMaterialThickness($event: MaterialThicknessEntity) {
+    this.materialThicknessSelected = $event;
+  }
+
+  private setMaterialBlank() {
     this.materialSelected = new MaterialEntity();
     this.materialSelected.en10088 = "nie wybrano (niewymagane)";
   }
 
-  private setMaterialGroupBlank(){
+  private setMaterialGroupBlank() {
     this.materialGroupSelected = new MaterialGroupEntity();
     this.materialGroupSelected.shortName = "nie wybrano";
   }

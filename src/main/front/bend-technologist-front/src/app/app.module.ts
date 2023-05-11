@@ -21,6 +21,8 @@ import {ToastInfoContainer} from "./shared/toast-info/toast-info-container.compo
 import {ToolsComponent} from './tools/tools.component';
 import { ToolsNewModalComponent } from './tools/tools-new-modal/tools-new-modal.component';
 import { ToolsEditModalComponent } from './tools/tools-edit-modal/tools-edit-modal.component';
+import { MaterialThicknessComponent } from './material-thickness/material-thickness.component';
+import { MaterialThicknessNewModalComponent } from './material-thickness/material-thickness-new-modal/material-thickness-new-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ToolsEditModalComponent } from './tools/tools-edit-modal/tools-edit-mod
     ToastInfoComponent,
     ToolsComponent,
     ToolsNewModalComponent,
-    ToolsEditModalComponent
+    ToolsEditModalComponent,
+    MaterialThicknessComponent,
+    MaterialThicknessNewModalComponent
   ],
   imports: [
     BrowserModule,

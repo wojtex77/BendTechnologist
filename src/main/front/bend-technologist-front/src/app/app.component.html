@@ -19,14 +19,14 @@
           <div ngbAccordionItem>
             <h2 ngbAccordionHeader>
               <button ngbAccordionButton>
-                <div class="col-3">Grupa materiałowa:</div>
-                <div class="col fw-bold">{{materialGroupSelected.shortName}}</div>
+                <div class="col-3">Grubość:</div>
+                <div class="col fw-bold">{{materialThicknessSelected.thickness | number: '1.1-2'}}</div>
               </button>
             </h2>
             <div ngbAccordionCollapse>
               <div ngbAccordionBody>
                 <ng-template>
-                  <app-material-groups class="bg-light" (materialGroupSelected)="setSelectedMaterialGroup($event)"></app-material-groups>
+                  <app-material-thickness class="bg-light" (materialThicknessSelected)="setSelectedMaterialThickness($event)" ></app-material-thickness>
                 </ng-template>
               </div>
             </div>
@@ -43,6 +43,23 @@
               <div ngbAccordionBody>
                 <ng-template>
                   <app-materials class="bg-light" (materialSelected)="setSelectedMaterial($event)"></app-materials>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+
+          <div ngbAccordionItem>
+            <h2 ngbAccordionHeader>
+              <button ngbAccordionButton>
+                <div class="col-3">Grupa materiałowa:</div>
+                <div class="col fw-bold">{{materialGroupSelected.shortName}}</div>
+              </button>
+            </h2>
+            <div ngbAccordionCollapse>
+              <div ngbAccordionBody>
+                <ng-template>
+                  <app-material-groups class="bg-light"
+                                       (materialGroupSelected)="setSelectedMaterialGroup($event)"></app-material-groups>
                 </ng-template>
               </div>
             </div>

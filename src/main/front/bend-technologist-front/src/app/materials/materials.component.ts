@@ -38,6 +38,7 @@ export class MaterialsComponent implements OnInit {
     let materialNewModalComponentReference = this.modalNewMaterialService.open(MaterialNewModalComponent, {size: 'sm'});
     materialNewModalComponentReference.componentInstance.newMaterialSaved.subscribe((res: MaterialEntity) => {
       this.materials.push(res);
+      this.selectMaterial(res);
       this.toastService.showSuccessToast("Dodano nowy materiał: \"" + res.en10088 + "\"")
     });
   }
@@ -52,6 +53,7 @@ export class MaterialsComponent implements OnInit {
         }
         i++;
       })
+        this.materialSelected.emit(new MaterialEntity())
         this.toastService.showSuccessToast("Pomyślnie usunięto materiał")
     },
       error => {
@@ -83,7 +85,6 @@ export class MaterialsComponent implements OnInit {
   }
 
   selectMaterial(material: MaterialEntity) {
-
     this.materialSelected.emit(material)
   }
 }

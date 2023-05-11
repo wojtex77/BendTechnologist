@@ -8,7 +8,7 @@
     <th>Pełna nazwa</th>
     <th>Akcje</th>
     </thead>
-    <tbody class="text-center">
+    <tbody class="text-center clickable">
     <tr *ngFor="let materialGroup of materialGroups" (click)="selectMaterialGroup(materialGroup)">
       <td>{{materialGroup.shortName}}</td>
       <td>{{materialGroup.fullName}}</td>

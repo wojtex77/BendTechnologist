@@ -9,7 +9,7 @@
     <th>Opis</th>
     <th>Akcje</th>
     </thead>
-    <tbody class="text-center">
+    <tbody class="text-center clickable">
     <tr *ngFor="let tool of toolSets" (click)="setAsActive(tool)">
       <td>{{tool.punchName}}</td>
       <td>{{tool.dieName}}</td>

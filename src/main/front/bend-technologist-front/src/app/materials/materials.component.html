@@ -13,7 +13,7 @@
     <th>Gęstość</th>
     <th>Akcje</th>
     </thead>
-    <tbody class="text-center">
+    <tbody class="text-center clickable">
     <tr *ngFor="let material of materials" (click)="selectMaterial(material)">
       <td>{{material.materialGroup.shortName}}</td>
       <td>{{material.en10088}}</td>

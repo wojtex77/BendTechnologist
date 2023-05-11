@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h4 class="modal-title">Nowy zestaw narzędzi</h4>
+  <button type="button" class="btn-close" aria-label="Close"
+          (click)="activeNewThicknessModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="thicknessForm">
+
+    <div class="form-floating mb-3">
+      <input type="number" min="0" step="0.1" class="form-control" id="thickness" formControlName="thickness" placeholder="">
+      <label for="thickness">Grubość materiału [mm]</label>
+    </div>
+
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-sm btn-outline-danger" (click)="activeNewThicknessModal.close('Close click')">
+    Zamknij
+  </button>
+  <button type="submit" class="btn btn-sm btn-outline-success" (click)="onSubmit()">Zapisz</button>
+
+
+</div>
