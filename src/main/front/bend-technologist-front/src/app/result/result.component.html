@@ -1,7 +1,8 @@
 <h2>Wyniki</h2>
+<div *ngIf="isInputDataComplete && isResult; else noDataBlock">
+  <div>Ubytek materiału dla kąta 90 wynosi: {{dbBendAllowance.bendAllowance | number: "1.1-2"}} [mm]</div>
+  <div>Współczynnik k wynosi: {{dbBendAllowance.kFactor | number: "1.1-2"}}</div>
+</div>
 
-<div>{{isDataComplete}}</div>
-<div>{{counter}}</div>
 
-
-
+<ng-template #noDataBlock>brak danych dla podanych parametrów. <a class="link-primary" *ngIf="isInputDataComplete&&!isResult" (click)="newBendAllowance()">Wprowadź ubytek</a></ng-template>

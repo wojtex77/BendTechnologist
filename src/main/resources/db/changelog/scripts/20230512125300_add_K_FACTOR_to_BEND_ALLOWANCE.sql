@@ -1,0 +1,2 @@
+ALTER TABLE BEND_ALLOWANCE
+    ADD K_FACTOR FLOAT NOT NULL COMMENT 'k factor for specific case';

@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h4 class="modal-title">Nowy ubytek materiału</h4>
+  <button type="button" class="btn-close" aria-label="Close"
+          (click)="activeNewBendAllowanceModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="bendAllowanceForm">
+
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="bendAllowance" formControlName="bendAllowance" placeholder="">
+      <label for="bendAllowance">Ubytek materiału [mm]</label>
+    </div>
+
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-sm btn-outline-danger" (click)="activeNewBendAllowanceModal.close('Close click')">
+    Zamknij
+  </button>
+  <button type="submit" class="btn btn-sm btn-outline-success" (click)="onSubmit()">Zapisz</button>
+
+
+</div>

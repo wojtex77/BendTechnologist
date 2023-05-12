@@ -10,4 +10,8 @@
     <include relativeToChangelogFile="true" file="scripts/20230510150500_create_TOOL_SET.sql"/>
     <include relativeToChangelogFile="true" file="scripts/20230510151600_add_DESCRIPTION_to TOOL_SET.sql"/>
     <include relativeToChangelogFile="true" file="scripts/20230511115000_create_MATERIAL_THICKNESS.sql"/>
+    <include relativeToChangelogFile="true" file="scripts/20230512084600_create_BEND_ALLOWANCE.sql"/>
+    <include relativeToChangelogFile="true" file="scripts/20230512125300_add_K_FACTOR_to_BEND_ALLOWANCE.sql"/>
+    <include relativeToChangelogFile="true" file="scripts/20230512142500_add_UNIQUE_KEY_to_BEND_ALLOWANCE.sql"/>
+
 </databaseChangeLog>
