@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {RequiredDataWrapper} from "../entitites/RequiredDataWrapper";
 import {HttpClient} from "@angular/common/http";
 import {BendAllowanceEntity} from "../entitites/BendAllowanceEntity";
+import {BendAllowanceDetailsEntity} from "../entitites/BendAllowanceDetailsEntity";
 
 @Injectable({providedIn: "root"})
 export class ResultService {
@@ -29,5 +30,10 @@ export class ResultService {
     submittedBendAllowance.toolSet = dataWrapper.toolSetEntity;
 
     return this.http.post<BendAllowanceEntity>(this.bendAllowanceURL, submittedBendAllowance)
+  }
+
+  getMoreDetails(id: number){
+
+    return this.http.get<BendAllowanceDetailsEntity>(this.bendAllowanceURL.concat("/details/", id.toString()));
   }
 }

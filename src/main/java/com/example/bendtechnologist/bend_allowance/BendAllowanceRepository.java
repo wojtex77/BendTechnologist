@@ -1,5 +1,6 @@
 package com.example.bendtechnologist.bend_allowance;
 
+import com.example.bendtechnologist.bend_allowance.entities.BendAllowance;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

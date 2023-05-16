@@ -1,5 +1,6 @@
-package com.example.bendtechnologist.bend_allowance;
+package com.example.bendtechnologist.bend_allowance.entities;
 
+import com.example.bendtechnologist.bend_allowance.IncorrectKFactorValueException;
 import com.example.bendtechnologist.material_group.MaterialGroup;
 import com.example.bendtechnologist.material_thickness.MaterialThickness;
 import com.example.bendtechnologist.shared.AuditedEntity;

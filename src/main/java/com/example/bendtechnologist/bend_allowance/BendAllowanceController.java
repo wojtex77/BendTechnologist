@@ -1,7 +1,7 @@
 package com.example.bendtechnologist.bend_allowance;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import com.example.bendtechnologist.bend_allowance.entities.BendAllowance;
+import com.example.bendtechnologist.bend_allowance.entities.BendAllowanceDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +23,11 @@ import java.util.Optional;
 public class BendAllowanceController {
 
     private final BendAllowanceRepository repository;
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final BendAllowanceHelper helper;
 
-    public BendAllowanceController(BendAllowanceRepository repository) {
+    public BendAllowanceController(BendAllowanceRepository repository, BendAllowanceHelper helper) {
         this.repository = repository;
+        this.helper = helper;
     }
 
     @PostMapping
@@ -52,5 +52,17 @@ public class BendAllowanceController {
         Optional<BendAllowance> bendAllowanceByIds = repository.findBendAllowanceByIds(thicknessId, materialGroupId, toolSetId);
 
         return bendAllowanceByIds.map(bendAllowance -> new ResponseEntity<>(bendAllowance, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NO_CONTENT));
+    }
+
+    @GetMapping("details/{id}")
+    public ResponseEntity<BendAllowanceDetails> getDetails(@PathVariable("id") Long id){
+
+        BendAllowance bendAllowance;
+        Optional<BendAllowance> byId = repository.findById(id);
+        if (byId.isPresent()){
+            bendAllowance = byId.get();
+            return new ResponseEntity<>(helper.calculateBendAllowanceDetails(bendAllowance), HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
     }
 }

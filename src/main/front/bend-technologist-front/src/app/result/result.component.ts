@@ -6,6 +6,7 @@ import {ResultService} from "./result.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ResultNewModalComponent} from "./result-new-modal/result-new-modal.component";
 import {ToastService} from "../shared/toast-info/toast-info-service.component";
+import {BendAllowanceDetailsEntity} from "../entitites/BendAllowanceDetailsEntity";
 
 @Component({
   selector: 'app-result',
@@ -19,6 +20,8 @@ export class ResultComponent {
   isResult: boolean = false;
   counter: number = 0;
   dbBendAllowance!: BendAllowanceEntity;
+  bendAllowanceDetails: BendAllowanceDetailsEntity;
+  isDetailsShown = false;
 
 
   private eventsSubscription!: Subscription;
@@ -29,6 +32,7 @@ export class ResultComponent {
   constructor(private resultService: ResultService,
               private modalNewResultService: NgbModal,
               private toastService: ToastService) {
+    this.bendAllowanceDetails = new BendAllowanceDetailsEntity();
   }
 
   ngOnInit() {
@@ -52,11 +56,11 @@ export class ResultComponent {
   }
 
   private getBendAllowance() {
+    this.isDetailsShown = false;
+    this.bendAllowanceDetails = new BendAllowanceDetailsEntity();
     this.resultService.getBendAllowance(this.dataWrapper).subscribe(response => {
       if (response != null) {
         this.dbBendAllowance = response;
-        console.log(this.dbBendAllowance)
-        console.log(response)
         this.isResult = true;
       } else {
         this.isResult = false;
@@ -71,11 +75,18 @@ export class ResultComponent {
     resultNewModalComponentReference.componentInstance.newBendAllowanceSubmitted.subscribe((res: BendAllowanceEntity) => {
       let submittedBendAllowance = res;
       this.resultService.saveBendAllowance(this.dataWrapper, submittedBendAllowance).subscribe(response =>{
-        this.dbBendAllowance = res;
-        console.log(res)
-        this.toastService.showSuccessToast("Dodano nowy ubytek: \"" + res.bendAllowance + "\"")
+        this.dbBendAllowance = response;
+        console.log(response)
+        this.toastService.showSuccessToast("Dodano nowy ubytek: \"" + response.bendAllowance + "\"")
       },
         error => {this.toastService.showDangerToast("Nie udało się zapisać ubytku")})
     });
+  }
+
+  showMoreData(id: number) {
+    this.resultService.getMoreDetails(id).subscribe(response => {
+      this.bendAllowanceDetails = response;
+      this.isDetailsShown = true;
+    })
   }
 }

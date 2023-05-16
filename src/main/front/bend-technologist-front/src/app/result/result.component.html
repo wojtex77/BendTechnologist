@@ -1,8 +1,41 @@
-<h2>Wyniki</h2>
-<div *ngIf="isInputDataComplete && isResult; else noDataBlock">
-  <div>Ubytek materiału dla kąta 90 wynosi: {{dbBendAllowance.bendAllowance | number: "1.1-2"}} [mm]</div>
-  <div>Współczynnik k wynosi: {{dbBendAllowance.kFactor | number: "1.1-2"}}</div>
+<h2 class="my-4">Wyniki</h2>
+<div *ngIf="isInputDataComplete && isResult; else noDataBlock" class="row">
+  <div class="col-6 text-end">Ubytek materiału dla kąta 90 wynosi:</div>
+  <div class="col-6 fw-bold">{{dbBendAllowance.bendAllowance | number: "1.1-2"}} [mm]</div>
+  <div class="col-6 text-end">Współczynnik k wynosi:</div>
+  <div class="col-6 fw-bold">{{dbBendAllowance.kFactor | number: "1.1-2"}}</div>
+  <div class="col-12 text-center my-5" *ngIf="!isDetailsShown; else hideDataBlock"><a class="link-primary" (click)="showMoreData(dbBendAllowance.id)">Pokaż więcej
+    danych</a></div>
+  <div class="row" *ngIf="isDetailsShown">
+    <table class="table table-hover">
+      <thead class="bg-dark text-light text-center">
+      <th>Kąt [&deg;]</th>
+      <th>Ubytek [mm]</th>
+      <th>Minimalna długość gięcia [mm]</th>
+      </thead>
+      <tbody class="text-center">
+      <tr *ngFor="let data of bendAllowanceDetails.bendAllowanceAngleDataList">
+        <td>
+          {{data.angle}}
+        </td>
+        <td>
+          {{data.bendAllowanceValue}}
+        </td>
+        <td>
+          {{data.minimalBendLength}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 
-<ng-template #noDataBlock>brak danych dla podanych parametrów. <a class="link-primary" *ngIf="isInputDataComplete&&!isResult" (click)="newBendAllowance()">Wprowadź ubytek</a></ng-template>
+<ng-template #noDataBlock>brak danych dla podanych parametrów. <a class="link-primary"
+                                                                  *ngIf="isInputDataComplete&&!isResult"
+                                                                  (click)="newBendAllowance()">Wprowadź ubytek</a>
+</ng-template>
+
+
+<ng-template #hideDataBlock><a class="link-primary text-center my-5" (click)="isDetailsShown = false">Ukryj dane</a>
+</ng-template>
