@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class BendAllowanceAngleData {
 
-    private Float angle;
-    private Float bendAllowanceValue;
-    private Float minimalBendLength;
+    private Double angle;
+    private Double bendAllowanceValue;
+    private Double minimalBendLength;
 }
