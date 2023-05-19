@@ -18,10 +18,10 @@ public class ToolSet extends AuditedEntity {
     private String dieName;
 
     @Column(name = "PUNCH_RADIUS")
-    private Float punchRadius;
+    private Double punchRadius;
 
     @Column(name = "DIE_WIDTH")
-    private Float dieWidth;
+    private Double dieWidth;
 
     @Column(name = "DESCRIPTION")
     private String description;

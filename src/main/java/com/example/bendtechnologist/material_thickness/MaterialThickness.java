@@ -23,6 +23,6 @@ public class MaterialThickness extends AuditedEntity {
 
     @ToString.Include
     @Column(name = "THICKNESS", nullable = false)
-    private Float thickness;
+    private Double thickness;
 
 }

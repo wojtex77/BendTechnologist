@@ -46,17 +46,17 @@ public class BendAllowance extends AuditedEntity {
     private ToolSet toolSet;
 
     @Column(name = "ALLOWANCE_90_DEGREE")
-    private Float bendAllowance;
+    private Double bendAllowance;
 
     @Column(name = "K_FACTOR")
     @JsonProperty("kFactor")
-    private Float kFactor;
+    private Double kFactor;
 
     @PrePersist
     @PreUpdate
     public void calculateKFactor() {
         kFactor = ((4*(getToolSet().getPunchRadius()+ getMaterialThickness().getThickness())) - (2*bendAllowance) - ((float) Math.PI * getToolSet().getPunchRadius()))/( (float) Math.PI * getMaterialThickness().getThickness());
-        if (kFactor > 1) kFactor = Float.valueOf(1);
+        if (kFactor > 1) kFactor = Double.valueOf(1);
         if (kFactor <= 0) throw new IncorrectKFactorValueException("K Factor <= 0");
         log.info("Preupdate action" + kFactor);
     }

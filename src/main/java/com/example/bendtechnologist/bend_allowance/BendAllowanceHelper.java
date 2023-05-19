@@ -23,32 +23,62 @@ public class BendAllowanceHelper {
 
     private void calculateAngles(BendAllowanceDetails data) {
 
-        float beginningAngle = 20F;
-        float endingAngle = 175F;
+        double angle = 20D;
+        double endingAngle = 175D;
 
         data.setBendAllowanceAngleDataList(new ArrayList<>());
-        while (beginningAngle <= endingAngle) {
-            data.getBendAllowanceAngleDataList().add(calculateBendAllowance(beginningAngle,
-                    data.getBendAllowance().getKFactor(),
-                    data.getBendAllowance().getMaterialThickness().getThickness(),
-                    data.getBendAllowance().getToolSet().getPunchRadius()));
-            beginningAngle += 5F;
+        while (angle <= endingAngle) {
+            data.getBendAllowanceAngleDataList().add(createBendAllowance(angle,
+                    data));
+            angle += 5D;
         }
 
 
     }
 
 
-    private BendAllowanceAngleData calculateBendAllowance(Float angle, Float kFactor, Float thickness, Float radius) {
+    private BendAllowanceAngleData createBendAllowance(Double angle, BendAllowanceDetails data) {
 
-        Float allowance = (((180F - angle) * (float) Math.PI) / (180F) * (radius + (kFactor * thickness)));
+        double allowance = calculateBendAllowance(angle,
+                data.getBendAllowance().getKFactor(),
+                data.getBendAllowance().getMaterialThickness().getThickness(),
+                data.getBendAllowance().getToolSet().getPunchRadius());
+
+        double minimalLength = getMinimalLength(angle,
+                data.getBendAllowance().getToolSet().getDieWidth(),
+                data.getBendAllowance().getMaterialThickness().getThickness(),
+                data.getBendAllowance().getToolSet().getPunchRadius());
 
         BendAllowanceAngleData.BendAllowanceAngleDataBuilder builder = BendAllowanceAngleData.builder();
         builder.bendAllowanceValue(allowance);
         builder.angle(angle);
-        builder.minimalBendLength(987F);
+        builder.minimalBendLength(minimalLength);
 
         return builder.build();
 
+    }
+
+    private double getMinimalLength(Double angle, Double dieWidth, Double thickness, Double punchRadius) {
+
+        double minimalLength = dieWidth / (2D * Math.sin(Math.toRadians(angle / 2D)));
+        if (angle <= 90D) {
+            double partialValue = (thickness + punchRadius) *
+                    Math.tan(Math.toRadians((180D - angle) / 2D));
+            minimalLength = minimalLength - (partialValue - thickness - punchRadius);
+        }
+        return minimalLength * 1.05D;
+    }
+
+    private double calculateBendAllowance(Double angle, Double kFactor, Double thickness, Double radius) {
+
+        double firstPart = (radius + (thickness * kFactor)) * (Math.PI * 2) * (180 - angle) / 360;
+        double secondPart;
+        if (angle > 90D && angle <= 180D) {
+            secondPart = (radius + thickness) * Math.tan(Math.toRadians((180 - angle) / 2));
+        } else if (angle >= 10D && angle <= 90D) {
+            secondPart = radius + thickness;
+        } else secondPart = 0;
+
+        return ((2 * secondPart) - firstPart);
     }
 }
