@@ -4,8 +4,10 @@
   <div class="col-6 fw-bold">{{dbBendAllowance.bendAllowance | number: "1.1-2"}} [mm]</div>
   <div class="col-6 text-end">Współczynnik k wynosi:</div>
   <div class="col-6 fw-bold">{{dbBendAllowance.kFactor | number: "1.1-2"}}</div>
-  <div class="col-12 text-center my-5" *ngIf="!isDetailsShown; else hideDataBlock"><a class="link-primary" (click)="showMoreData(dbBendAllowance.id)">Pokaż więcej
-    danych</a></div>
+  <div class="col-12 text-center my-5" *ngIf="!isDetailsShown; else hideDataBlock">
+    <button class="btn btn-sm btn-outline-secondary" (click)="showMoreData(dbBendAllowance.id)">Pokaż więcej danych
+    </button>
+  </div>
   <div class="row" *ngIf="isDetailsShown">
     <table class="table table-hover">
       <thead class="bg-dark text-light text-center">
@@ -31,11 +33,21 @@
 </div>
 
 
-<ng-template #noDataBlock>brak danych dla podanych parametrów. <a class="link-primary"
-                                                                  *ngIf="isInputDataComplete&&!isResult"
-                                                                  (click)="newBendAllowance()">Wprowadź ubytek</a>
+<ng-template #noDataBlock>
+  <div class="row my-4 text-center">
+    <button class="btn btn-sm btn-outline-success offset-sm-2 col-sm-8 offset-lg-5 col-lg-2"
+            *ngIf="isInputDataComplete&&!isResult" (click)="newBendAllowance()">
+      Wprowadź ubytek
+    </button>
+    <div>
+      brak danych dla podanych parametrów.
+    </div>
+  </div>
 </ng-template>
 
 
-<ng-template #hideDataBlock><a class="link-primary text-center my-5" (click)="isDetailsShown = false">Ukryj dane</a>
+<ng-template #hideDataBlock>
+  <div class="row my-4 text-center">
+    <button class="btn btn-sm btn-outline-success offset-sm-2 col-sm-8 offset-lg-5 col-lg-2" (click)="isDetailsShown = false">Ukryj dane</button>
+  </div>
 </ng-template>
