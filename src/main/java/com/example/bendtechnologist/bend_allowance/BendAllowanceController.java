@@ -65,4 +65,16 @@ public class BendAllowanceController {
         } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     }
+
+    @GetMapping("{id}")
+    public ResponseEntity<BendAllowance> getBendAllowanceById(@PathVariable("id") Long id){
+
+        BendAllowance bendAllowance;
+        Optional<BendAllowance> byId = repository.findById(id);
+        if (byId.isPresent()){
+            bendAllowance = byId.get();
+            return new ResponseEntity<>(bendAllowance, HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    }
 }

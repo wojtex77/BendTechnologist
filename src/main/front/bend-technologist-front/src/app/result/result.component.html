@@ -1,7 +1,10 @@
 <h2 class="my-4">Wyniki</h2>
 <div *ngIf="isInputDataComplete && isResult; else noDataBlock" class="row">
   <div class="col-6 text-end">Ubytek materiału dla kąta 90 wynosi:</div>
-  <div class="col-6 fw-bold">{{dbBendAllowance.bendAllowance | number: "1.1-2"}} [mm]</div>
+  <div class="col-6 fw-bold">
+    {{dbBendAllowance.bendAllowance | number: "1.1-2"}} [mm]
+    <i class="bi bi-pencil-square mx-2 clickable" (click)="editBendAllowance(dbBendAllowance.id)"></i>
+  </div>
   <div class="col-6 text-end">Współczynnik k wynosi:</div>
   <div class="col-6 fw-bold">{{dbBendAllowance.kFactor | number: "1.1-2"}}</div>
   <div class="col-12 text-center my-5" *ngIf="!isDetailsShown; else hideDataBlock">
