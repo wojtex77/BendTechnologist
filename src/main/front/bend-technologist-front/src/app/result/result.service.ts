@@ -36,4 +36,9 @@ export class ResultService {
 
     return this.http.get<BendAllowanceDetailsEntity>(this.bendAllowanceURL.concat("/details/", id.toString()));
   }
+
+  getAllowanceById(id: number){
+
+    return this.http.get<BendAllowanceEntity>(this.bendAllowanceURL.concat("/",id.toString()));
+  }
 }

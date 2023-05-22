@@ -25,6 +25,7 @@ import { MaterialThicknessComponent } from './material-thickness/material-thickn
 import { MaterialThicknessNewModalComponent } from './material-thickness/material-thickness-new-modal/material-thickness-new-modal.component';
 import { ResultComponent } from './result/result.component';
 import { ResultNewModalComponent } from './result/result-new-modal/result-new-modal.component';
+import { ResultEditModalComponent } from './result/result-edit-modal/result-edit-modal.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ResultNewModalComponent } from './result/result-new-modal/result-new-mo
     MaterialThicknessComponent,
     MaterialThicknessNewModalComponent,
     ResultComponent,
-    ResultNewModalComponent
+    ResultNewModalComponent,
+    ResultEditModalComponent
   ],
   imports: [
     BrowserModule,
